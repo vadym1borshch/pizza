@@ -48,7 +48,7 @@ const Input: FC<IInputProps> = ({
     <div className={`flex relative w-full `}>
       <input
         id="input"
-        className={`${inputStyles({focused})} mobile:h-8 tablet:h-10`}
+        className={`${inputStyles({focused})} mobile:h-8 tablet:h-10 `}
         value={value}
         onChange={onChangeHandler}
         onFocus={handleFocus}

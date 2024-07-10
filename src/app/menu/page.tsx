@@ -26,6 +26,8 @@ const Menu: FC<IMenuProps> = ({}) => {
     return () => {};
   }, [freeHeight]);
 
+  console.log(menu)
+
   return (
     <div
       className={`flex-1 flex flex-col z-1 sm:text-sm top-26 md:text-[24px]   

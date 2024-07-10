@@ -5,10 +5,10 @@ export const inputStyles = (params: {
   extStyles?: InputStylesType;
 }) => {
   const defaultStyle =
-    "w-full rounded-lg" +
-    "focus:outline-none px-1 h-6 text-teal-600 text-[70%]" +
-    " border-2 border-solid rounded-lg ";
-  const focusedStyle = "border-blue-500"
+    "w-full rounded-lg " +
+    "focus:outline-none  px-1 h-6 text-teal-600 text-[70%] " +
+    "border-2 border-solid rounded-lg ";
+  const focusedStyle = "focus:border-blue-700"
   const blurredStyle = "border-yellow-500"
   return `${defaultStyle} ${params.focused ? focusedStyle : blurredStyle}`;
 };

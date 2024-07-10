@@ -11,7 +11,7 @@ const Pizza: FC<IPizzaProps> = ({ pizza }) => {
   return (
     <div className="w-full h-28 relative border-b-2 border-amber-300 ">
       <div className="flex h-26 gap-2 ">
-        <Image src={pizza.imageUrl} alt={pizza.name} width={120} height={100} />
+        <Image className="w-auto h-auto" src={pizza.imageUrl} alt={pizza.name} width={90} height={100}  priority/>
         <div className="flex flex-col justify-between">
           <div className="flex flex-col gap-2">
             <span>{pizza.name}</span>

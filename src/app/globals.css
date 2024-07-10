@@ -27,10 +27,7 @@
   font-size: 0.75rem;
   color: blue;
 }
-img {
-  width: auto;
-  height: auto;
-}
+
 @layer utilities {
   .grid-rows-layout {
     grid-template-rows: 64px 1fr 64px;
