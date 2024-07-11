@@ -1,32 +1,23 @@
 "use client";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { menuSelector } from "@/store/slices/menuSlice/selectors";
 import { AppDispatch } from "@/store/store";
 import { getMenu } from "@/services/apiRestaurant";
 import Pizza from "@/components/Pizza/Pizza";
-import useWindowSize from "@/hooks/useWindowSize";
 
 interface IMenuProps {
   // define your props here
 }
 
 const Menu: FC<IMenuProps> = ({}) => {
-  const [height, setHeight] = useState<number>(0);
   const menu = useSelector(menuSelector);
   const dispatch = useDispatch<AppDispatch>();
-  const { freeHeight } = useWindowSize(128);
 
   useEffect(() => {
     dispatch(getMenu());
     return () => {};
   }, [dispatch]);
-  useEffect(() => {
-    setHeight(freeHeight);
-    return () => {};
-  }, [freeHeight]);
-
-  console.log(menu)
 
   return (
     <div

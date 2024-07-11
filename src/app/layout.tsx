@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "@/store/StoreProvider";
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
+import ComponentsLayout from "@/app/ComponentsLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,13 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <StoreProvider>
-          <div className="h-screen flex flex-col z-0">
-            <Header />
-            <div className="flex-grow overflow-auto">
-              {children}
-            </div>
-            <Footer />
-          </div>
+          <ComponentsLayout>{children}</ComponentsLayout>
         </StoreProvider>
       </body>
     </html>

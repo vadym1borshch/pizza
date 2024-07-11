@@ -28,6 +28,11 @@
   color: blue;
 }
 
+img {
+  width: auto;
+  height: 100%;
+}
+
 @layer utilities {
   .grid-rows-layout {
     grid-template-rows: 64px 1fr 64px;

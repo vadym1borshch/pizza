@@ -6,17 +6,17 @@ export const inputStyles = (params: {
 }) => {
   const defaultStyle =
     "w-full rounded-lg " +
-    "focus:outline-none  px-1 h-6 text-teal-600 text-[70%] " +
-    "border-2 border-solid rounded-lg ";
-  const focusedStyle = "focus:border-blue-700"
-  const blurredStyle = "border-yellow-500"
+    "focus:outline-none  px-1 h-6 text-standard text-[70%] " +
+    "border-2 border-solid rounded-lg bg-white";
+  const focusedStyle = "focus:border-secondary"
+  const blurredStyle = "border-primary"
   return `${defaultStyle} ${params.focused ? focusedStyle : blurredStyle}`;
 };
 
 export const labelStyles = (params: { focused: boolean }) => {
   const defaultStyle =
     "absolute h-fit transition-all " +
-    "duration-100 ease-in-out text-black text-[10px] ";
+    "duration-100 ease-in-out text-standard text-[10px] ";
   const focusedStyle =
     "top-0 left-[10px] transform -translate-y-1/2" +
     " text-[8px] bg-inherit px-1 bg-white";

@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type CartItemType = {
+export type CartItemType = {
   id: number;
   itemName: string;
-  totalItems: number;
+  quantity: number;
   amount: number;
+  unitPrice: number;
 };
 
 export interface ICart {
@@ -12,7 +13,7 @@ export interface ICart {
 }
 
 const initialState: ICart = {
-  cartItems:[]
+  cartItems: [],
 };
 
 export const cartSlice = createSlice({
@@ -22,28 +23,81 @@ export const cartSlice = createSlice({
     addToCartAction: (state, action: PayloadAction<CartItemType>) => {
       state.cartItems.push(action.payload);
     },
-    decrementAction: (state) => {},
-    incrementAction: (state, action) => {},
+    decrementAction: (
+      state,
+      action: PayloadAction<{ id: number; amount: number }>,
+    ) => {
+      const findItem = state.cartItems.find(
+        (item) => item.id === action.payload.id,
+      );
+      if (findItem && findItem.quantity <= 1) {
+        state.cartItems = state.cartItems.filter(
+          (item) => item.id !== findItem.id,
+        );
+        return;
+      }
+
+      state.cartItems = state.cartItems.map((item) => {
+        if (item.id === action.payload.id) {
+          return {
+            ...item,
+            quantity: --item.quantity,
+            amount: item.amount - action.payload.amount,
+          };
+        }
+        return item;
+      });
+    },
+    incrementAction: (
+      state,
+      action: PayloadAction<{ id: number; amount: number }>,
+    ) => {
+      state.cartItems = state.cartItems.map((item) => {
+        if (item.id === action.payload.id) {
+          return {
+            ...item,
+            quantity: ++item.quantity,
+            amount: item.amount + action.payload.amount,
+          };
+        }
+        return item;
+      });
+    },
+    deleteItemAction: (state, action: PayloadAction<number>) => {
+      state.cartItems = state.cartItems.filter(
+        (item) => item.id !== action.payload,
+      );
+    },
+    clearCartAction: (state) => {
+      state.cartItems = [];
+    },
   },
   /* extraReducers: (builder) => {
-       builder
-         .addCase(getMenu.pending, (state) => {
-           state.status = "loading";
-         })
-         .addCase(
-           getMenu.fulfilled,
-           (state, action: PayloadAction<IMenuItem[]>) => {
-             state.status = "succeeded";
-             state.menu = action.payload;
-           },
-         )
-         .addCase(getMenu.rejected, (state, action) => {
-           state.status = "failed";
-           state.error = action.error.message
-         });
-     },*/
+                       builder
+                         .addCase(getMenu.pending, (state) => {
+                           state.status = "loading";
+                         })
+                         .addCase(
+                           getMenu.fulfilled,
+                           (state, action: PayloadAction<IMenuItem[]>) => {
+                             state.status = "succeeded";
+                             state.menu = action.payload;
+                           },
+                         )
+                         .addCase(getMenu.rejected, (state, action) => {
+                
+                           state.status = "failed";
+                           state.error = action.error.message
+                         });
+                     },*/
 });
 
-export const { addToCartAction, decrementAction, incrementAction } = cartSlice.actions;
+export const {
+  addToCartAction,
+  decrementAction,
+  deleteItemAction,
+  incrementAction,
+  clearCartAction,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

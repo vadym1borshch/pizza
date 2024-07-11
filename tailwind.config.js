@@ -6,9 +6,22 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+      colors: {
+          primary: '#f59e0b',
+          secondary: '#0ea5e9',
+          success: '#22c55e',
+          info: '#e879f9',
+          error: '#dc2626',
+          warning: '#fde047',
+          standard: '#020617',
+          white: '#f8fafc',
+          disabled: '#9ca3af',
+          light: '#e2e8f0',
+          // ...
+      },
     extend: {
       screens: {
-        'mobile': '480px',
+        'mobile': '0px',
         'tablet': '640px',
         'laptop': '1024px',
         'desktop': '1280px',

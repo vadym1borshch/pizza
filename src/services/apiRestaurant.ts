@@ -10,7 +10,7 @@ export interface IMenuItem {
   ingredients: string[];
   name: string;
   soldOut: boolean;
-  unitPrice: string;
+  unitPrice: number;
 }
 
 export interface IOrder {
@@ -42,10 +42,11 @@ export const getMenu = createAsyncThunk(
   },
 );
 
-export const getOrder = async (id: number): Promise<IOrder> => {
+export const getOrder = async (id: string): Promise<IOrder> => {
   try {
     const res = await axios.get(`${API_URL}/order/${id}`);
     const { data }: { data: IOrder } = res;
+    console.log(data)
     return data;
   } catch (err) {
     throw new Error(`Couldn't find order #${id}`);
