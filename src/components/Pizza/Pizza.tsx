@@ -33,10 +33,13 @@ const Pizza: FC<IPizzaProps> = ({ pizza }) => {
   const addToCartHandler = () => {
     const item: CartItemType = {
       id: pizza.id,
-      itemName: pizza.name,
+      name: pizza.name,
       amount: pizza.unitPrice,
       quantity: 1,
       unitPrice: pizza.unitPrice,
+      soldOut: false,
+      ingredients: pizza.ingredients,
+      imageUrl: pizza.imageUrl,
     };
     dispatch(addToCartAction(item));
   };

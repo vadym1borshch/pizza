@@ -21,7 +21,7 @@ module.exports = {
       },
     extend: {
       screens: {
-        'mobile': '0px',
+        'mobile': '375px',
         'tablet': '640px',
         'laptop': '1024px',
         'desktop': '1280px',

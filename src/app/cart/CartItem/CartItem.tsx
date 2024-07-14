@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 
 interface ICartItemProps {
-  cartItems: CartItemType[];
+  cartItems?: CartItemType[];
   hideButtonsContainer?: boolean
 }
 
@@ -37,7 +37,7 @@ const CartItem: React.FC<ICartItemProps> = ({ cartItems , hideButtonsContainer})
 
   return (
     <>
-      {cartItems.map((item) => {
+      {cartItems?.map((item) => {
         return (
           <div
             key={item.id}

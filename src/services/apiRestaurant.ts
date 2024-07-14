@@ -3,7 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const API_URL = "https://react-fast-pizza-api.onrender.com/api";
 
-// Define types for the expected data structures
 export interface IMenuItem {
   id: number;
   imageUrl: string;
@@ -17,17 +16,17 @@ export interface IOrder {
   id: number;
   items: IMenuItem[];
   total: number;
-  // Add other fields as necessary
 }
 
 export interface INewOrder {
-  items: IMenuItem[];
-  // Add other fields as necessary
+  Cart: IMenuItem[];
+  Customer: string;
+  Phone: string;
+  Address: string;
 }
 
 export interface UpdateOrder {
   status?: string;
-  // Add other fields as necessary
 }
 
 export const getMenu = createAsyncThunk(
@@ -46,7 +45,7 @@ export const getOrder = async (id: string): Promise<IOrder> => {
   try {
     const res = await axios.get(`${API_URL}/order/${id}`);
     const { data }: { data: IOrder } = res;
-    console.log(data)
+    console.log(data);
     return data;
   } catch (err) {
     throw new Error(`Couldn't find order #${id}`);
@@ -56,7 +55,7 @@ export const getOrder = async (id: string): Promise<IOrder> => {
 export const createOrder = async (newOrder: INewOrder): Promise<IOrder> => {
   try {
     const res = await axios.post(`${API_URL}/order`, {
-      body: JSON.stringify(newOrder),
+      newOrder,
       headers: {
         "Content-Type": "application/json",
       },

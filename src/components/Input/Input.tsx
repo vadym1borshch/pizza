@@ -45,6 +45,7 @@ const Input: FC<IInputProps> = ({
   const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key.toLowerCase() == "enter") {
       dispatch(setUserAction({ id: id, name: value }));
+      localStorage.setItem("user", JSON.stringify({ id: id, name: value }));
       router.push("/menu");
       return;
     }

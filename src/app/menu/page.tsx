@@ -5,6 +5,8 @@ import { menuSelector } from "@/store/slices/menuSlice/selectors";
 import { AppDispatch } from "@/store/store";
 import { getMenu } from "@/services/apiRestaurant";
 import Pizza from "@/components/Pizza/Pizza";
+import {createOrderAction, OrderType} from "@/store/slices/userSlice/userSlice";
+import {useRouter} from "next/navigation";
 
 interface IMenuProps {
   // define your props here
@@ -13,11 +15,20 @@ interface IMenuProps {
 const Menu: FC<IMenuProps> = ({}) => {
   const menu = useSelector(menuSelector);
   const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
 
   useEffect(() => {
     dispatch(getMenu());
     return () => {};
   }, [dispatch]);
+
+  useEffect(() => {
+    const order = localStorage.getItem("order")
+    if (order) {
+      dispatch(createOrderAction(JSON.parse(order) as OrderType))
+      router.push("/order/overview");
+    }
+  }, [dispatch, router]);
 
   return (
     <div

@@ -6,8 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { userSelector } from "@/store/slices/userSlice/selectors";
 import Checkbox from "@/components/Checkbox/Checkbox";
 import { AppDispatch } from "@/store/store";
-import {createOrderAction, OrderType} from "@/store/slices/userSlice/userSlice";
-import {cartItemsSelector} from "@/store/slices/cartSlice/selectors";
+import {
+  createOrderAction,
+  OrderType,
+} from "@/store/slices/userSlice/userSlice";
+import { cartItemsSelector } from "@/store/slices/cartSlice/selectors";
 
 interface IOrderProps {
   // define your props here
@@ -18,14 +21,13 @@ const Order: React.FC<IOrderProps> = ({}) => {
   const [address, setAddress] = useState("");
   const [priority, setPriority] = useState(false);
   const user = useSelector(userSelector);
-  const pizzas = useSelector(cartItemsSelector)
+  const pizzas = useSelector(cartItemsSelector);
   const id = useId();
   const dispatch = useDispatch<AppDispatch>();
 
-
   const createOrderHandler = () => {
-const price = pizzas.reduce((acc, el) => acc + el.amount, 0);
-const priorityPr = +(price * 0.2).toFixed(1)
+    const price = pizzas.reduce((acc, el) => acc + el.amount, 0);
+    const priorityPr = Number((price * 0.2).toFixed(1));
 
     const newOrder: OrderType = {
       cart: pizzas,
@@ -37,9 +39,11 @@ const priorityPr = +(price * 0.2).toFixed(1)
       status: "in process",
       priorityPrice: priorityPr,
     };
-    dispatch(createOrderAction(newOrder))
+    dispatch(createOrderAction(newOrder));
+    localStorage.setItem('order', JSON.stringify({
+      ...newOrder
+    }));
   };
-
   return (
     <div className="w-[50%] flex flex-col h-full">
       <form
